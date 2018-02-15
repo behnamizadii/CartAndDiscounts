@@ -1,0 +1,47 @@
+﻿@using CartAndDiscounts.Models
+@using CartAndDiscounts.Controllers
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (Item item in (List<Item>)Session["cart"])
+        {
+        <tr>
+            <td>@item.Product.ProductName</td>
+            <td>@item.Product.Price</td>
+            <td>@item.Quantity</td>
+            <td>@(item.TotalDiscount)</td>
+            <td>@(item.TotalPrice)</td>
+        </tr>
+        }
+    </table>
+    <br/>
+    <hr/>
+        <b>Total Discount:</b> @ViewBag.totalDiscount
+        <br/>
+        <b>Total Price:</b> @ViewBag.totalPrice
+    <hr/>
+    <br/>
+    @Html.ActionLink("Continue Shopping", "Index", "Product")
+</div>
+</body>
+</html>
+<link href="~/Content/Site.css" rel="stylesheet" />

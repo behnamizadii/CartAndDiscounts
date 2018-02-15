@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CartAndDiscounts.Models.Product>
+
+@{
+    Layout = null;
+}
+
+@using CartAndDiscounts.Models
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<h2> Buy One Free One</h2>
+<h3> Only Today - All the items are eligible for an extra 5% discount</h3>
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Creation Date
+        </th>
+        <th>
+            Photo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Product product in ViewBag.listProducts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => product.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.ProductName)
+            </td>
+            <td>
+                £@Html.DisplayFor(modelItem => product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => product.CreationDate)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => product.PhotoPath)" height="150px" width="150px"/>
+            </td>
+            <td>
+                @Html.ActionLink("Add to Cart", "AddToCart", "Cart", new {id = product.ProductId}, null)
+            </td>
+        </tr>
+    }
+
+</table>
+</body>
+</html>
+<link href="~/Content/Site.css" rel="stylesheet" />
